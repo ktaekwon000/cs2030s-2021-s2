@@ -1,0 +1,928 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://nus-cs2030s.github.io/2021-s2/11-overriding.html">
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
+    
+    
+      
+        <title>11. Overriding - CS2030S Programming Methodology II</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.15aa0b43.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.75751829.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unit-11-overriding" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://nus-cs2030s.github.io/2021-s2" title="CS2030S Programming Methodology II" class="md-header-nav__button md-logo" aria-label="CS2030S Programming Methodology II">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            CS2030S Programming Methodology II
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              11. Overriding
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nus-cs2030s.github.io/2021-s2" title="CS2030S Programming Methodology II" class="md-nav__button md-logo" aria-label="CS2030S Programming Methodology II">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    CS2030S Programming Methodology II
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="index.html" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  
+
+
+  
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Notes
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Notes" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="00-overview.html" class="md-nav__link">
+      0. Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="01-compiler.html" class="md-nav__link">
+      1. Program and Compiler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="02-type.html" class="md-nav__link">
+      2. Variable and Type
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="03-function.html" class="md-nav__link">
+      3. Functions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="04-encapsulation.html" class="md-nav__link">
+      4. Encapsulation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="05-infohiding.html" class="md-nav__link">
+      5. Information Hiding
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="06-tell-dont-ask.html" class="md-nav__link">
+      6. Tell, Don't Ask
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="07-static-field.html" class="md-nav__link">
+      7. Class Fields
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="08-static-method.html" class="md-nav__link">
+      8. Class Methods
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="09-composition.html" class="md-nav__link">
+      9. Composition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="10-inheritance.html" class="md-nav__link">
+      10. Inheritance
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        11. Overriding
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="11-overriding.html" class="md-nav__link md-nav__link--active">
+      11. Overriding
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#object-and-string" class="md-nav__link">
+    Object and String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tostring-method" class="md-nav__link">
+    The toString Method
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-tostring-for-circle" class="md-nav__link">
+    Customizing toString for Circle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method-overriding" class="md-nav__link">
+    Method Overriding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-override-annotation" class="md-nav__link">
+    The @Override Annotation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="12-polymorphism.html" class="md-nav__link">
+      12. Polymorphism
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+    
+    <label class="md-nav__link" for="nav-3">
+      Slides
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Slides" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Slides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="slides/cs2030s-lec01.html" class="md-nav__link">
+      Lec 1. Introduction
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+    
+    <label class="md-nav__link" for="nav-4">
+      Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="environments.html" class="md-nav__link">
+      Programming Environments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2" >
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Using Unix CLI
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Using Unix CLI" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        <span class="md-nav__icon md-icon"></span>
+        Using Unix CLI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="unix-background.html" class="md-nav__link">
+      Background
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="unix-essentials.html" class="md-nav__link">
+      Essentials
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="unix-advanced.html" class="md-nav__link">
+      Advanced
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#object-and-string" class="md-nav__link">
+    Object and String
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tostring-method" class="md-nav__link">
+    The toString Method
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-tostring-for-circle" class="md-nav__link">
+    Customizing toString for Circle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method-overriding" class="md-nav__link">
+    Method Overriding
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-override-annotation" class="md-nav__link">
+    The @Override Annotation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="unit-11-overriding">Unit 11: Overriding</h1>
+<p>After reading this unit, students should</p>
+<ul>
+<li>be aware that every class inherits from <code>Object</code></li>
+<li>be familiar with the <code>equals</code> and <code>toString</code> methods</li>
+<li>understand what constitutes a method signature</li>
+<li>understand method overriding</li>
+<li>appreciate the power of method overriding</li>
+<li>understand what Java annotations are for, and know when to use <code>@Override</code></li>
+<li>be exposed to the <code>String</code> class and its associated methods, especially the <code>+</code> operator</li>
+</ul>
+<h2 id="object-and-string"><code>Object</code> and <code>String</code></h2>
+<p>In Java, every class that does not extend another class inherits from the <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html">class <code>Object</code></a> implicitly.  <code>Object</code> is, therefore, the "ancestors" of all classes in Java and is at the root of the class hierarchy.</p>
+<p>The <code>Object</code> class does not encapsulate anything in particular.  It is a very general class that provides useful methods common to all objects.  The two useful ones that we are going to spend time with are:</p>
+<ul>
+<li><code>equals(Object obj)</code>, which checks if two objects are equal to each other, and</li>
+<li><code>toString()</code>, which returns a string representation of the object as a <code>String</code> object.</li>
+</ul>
+<h2 id="the-tostring-method">The <code>toString</code> Method</h2>
+<p>The <code>toString</code> method is very special, as this is invoked <em>implicitly</em> by Java, by default, to convert a reference object to a <code>String</code> object during string concatenation using the operator <code>+</code>.</p>
+<p><a href="02-type.html">We showed you</a> that in Python, <code>4 + "Hello"</code> would result in a type mismatch error.  In Java, however, <code>4 + "Hello"</code> will result in the string <code>"4Hello"</code>.  In this example, the primitive value 4 is converted to a string before concatenation.</p>
+<p>A more interesting scenario is what happens if we try to concatenate, say, a <code>Circle</code> object with a string.  Let's say we have:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Circle</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Circle</span><span class="p">(</span><span class="k">new</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mf">4.0</span><span class="p">);</span>
+<span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;Circle c is &quot;</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table></p>
+<p>You will see that <code>s</code> now contains the string "Circle c is Circle@1ce92674<code>(the seemingly gibberish after</code>@` is the reference to the object and so your result will be different).</p>
+<p>What happened here is that the <code>+</code> operator sees that one of the operands is a string but the other is not, so it converts the one that is not a string to a string by calling its <code>toString()</code> method automatically for us.  This is equivalent to<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Circle</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Circle</span><span class="p">(</span><span class="k">new</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mf">4.0</span><span class="p">);</span>
+<span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;Circle c is &quot;</span> <span class="o">+</span> <span class="n">c</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+</code></pre></div>
+</td></tr></table></p>
+<p>Recall that in our <code>Circle</code> class (up to version 0.5) we do not have any <code>toString</code> method.  The <code>toString</code> method that we invoked here is the <code>toString</code> method inherited from its parent <code>Object</code>.</p>
+<div class="admonition note">
+<p class="admonition-title"><code>jshell</code> and <code>toString</code></p>
+<p>Recall that <code>jshell</code> is a REPL tool.  After evaluating an expression, <code>jshell</code> prints the resulting value out.  If the resulting value is a reference type, <code>jshell</code> will invoke <code>toString</code> to convert the reference type to a string first, before printing the string.</p>
+</div>
+<h2 id="customizing-tostring-for-circle">Customizing <code>toString</code> for <code>Circle</code></h2>
+<p>The <code>Object::toString</code> method (that is our notation for the method <code>toString</code> from the class <code>Object</code>) is not very user friendly.  Ideally, when we print a <code>Circle</code> object, say, for debugging, we want to see its center and its radius.  To do so, we can define our own <code>toString</code> method in <code>Circle</code>.  Let's upgrade our <code>Circle</code> class to do this:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// version 0.6</span>
+<span class="kn">import</span> <span class="nn">java.lang.Math</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * A Circle object encapsulates a circle on a 2D plane.  </span>
+<span class="cm"> */</span>
+<span class="kd">class</span> <span class="nc">Circle</span> <span class="p">{</span>
+  <span class="kd">private</span> <span class="n">Point</span> <span class="n">c</span><span class="p">;</span>   <span class="c1">// the center</span>
+  <span class="kd">private</span> <span class="kt">double</span> <span class="n">r</span><span class="p">;</span>  <span class="c1">// the length of the radius</span>
+
+  <span class="cm">/**</span>
+<span class="cm">   * Create a circle centered on Point c with given radius r</span>
+<span class="cm">  */</span>
+  <span class="kd">public</span> <span class="nf">Circle</span><span class="p">(</span><span class="n">Point</span> <span class="n">c</span><span class="p">,</span> <span class="kt">double</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">r</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">   * Return the area of the circle.</span>
+<span class="cm">   */</span>
+  <span class="kd">public</span> <span class="kt">double</span> <span class="nf">getArea</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">PI</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="na">r</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="na">r</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">   * Return true if the given point p is within the circle.</span>
+<span class="cm">   */</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="p">(</span><span class="n">Point</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="c1">// TODO: Left as an exercise</span>
+  <span class="p">}</span>
+
+<span class="hll">  <span class="cm">/**</span>
+</span><span class="hll"><span class="cm">   * Return the string representation of this circle.</span>
+</span><span class="hll"><span class="cm">   */</span>
+</span><span class="hll">  <span class="nd">@Override</span>
+</span><span class="hll">  <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="hll">      <span class="k">return</span> <span class="s">&quot;{ center: &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span> <span class="o">+</span> <span class="s">&quot;, radius:&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">r</span> <span class="o">+</span> <span class="s">&quot; }&quot;</span><span class="p">;</span>
+</span><span class="hll">  <span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>The body of the method <code>toString</code> simply constructs a string representation for this circle object and returns.  With this <code>toString</code> implemented, the output will look something like this:
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Circle c is { center: (0.0, 0.0), radius: 4.0 }
+</code></pre></div>
+</td></tr></table></p>
+<p>Note that when the center <code>this.c</code> is converted to a string, the <code>toString</code> method of <code>Point</code> is invoked.  We leave the implementation of <code>Point::toString</code> as an exercise.</p>
+<h2 id="method-overriding">Method Overriding</h2>
+<p>What we just did is called <em>method overriding</em> in OOP.  Inheritance is not only good for extending the behavior of an existing class but through method overriding, we can <em>alter</em> the behavior of an existing class as well.</p>
+<p>Let's define the <em>method signature</em> of a method as the method name and the number, type, and order of its parameters, and the <em>method descriptor</em> as the method signature plus the return type.<br />
+When a subclass defines an instance method with the same <em>method descriptor</em> as an instance method in the parent class, we say that the instance method in the subclass <em>overrides</em> the instance method in the parent class<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.  In the example above, <code>Circle::toString</code> has overridden <code>Object::toString</code>.</p>
+<h2 id="the-override-annotation">The <code>@Override</code> Annotation</h2>
+<p>Line 37 in the example above contains the symbol <code>@Override</code>.  This symbol is an example of <em>annotation</em> in Java.  An annotation is not part of the program and does not affect the bytecode generated.  Instead, it is a <em>hint</em> to the compiler.  Remember that the compiler is our friend who will do its best to help detect errors early, during compilation.  We must do our part to help the compiler help us.  Here, <code>@Override</code> is a hint to the compiler that the following method, <code>toString</code>, is intended to override the method in the parent class.  In case, there is a typo and overriding is not possible, the compiler will let us know.</p>
+<p>It is therefore recommended and expected that all overriding methods in your code are annotated with <code>@Override</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Using <code>super</code> To Access Overridden Methods</p>
+<p>After a subclass overrides a method in the superclass, the methods that have been overridden can still be called, with the <code>super</code> keyword.
+For instance, the following <code>Circle::toString</code> calls <code>Object::toString</code> to prefix the string representation of the circle with <code>Circle@1ce92674</code>.
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">super</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot; { center: &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">c</span> <span class="o">+</span> <span class="s">&quot;, radius:&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">r</span> <span class="o">+</span> <span class="s">&quot; }&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table></p>
+</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Calling <code>toString</code> explicit is not wrong, but we usually omit the call to keep the code readable and succinct.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>It is possible to override a method in some cases when the return type is different.  We will discuss this during recitations.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="10-inheritance.html" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                10. Inheritance
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="12-polymorphism.html" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                12. Polymorphism
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright by Department of Computer Science, National University of Singapore 2021
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.8c7e0a7e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+      
+    
+  </body>
+</html>
